@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: veiculos
+  labels:
+    app: veiculos
+spec:
+  ports:
+  - port: 8090
+  selector:
+    app: veiculos
+  type: LoadBalancer
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: veiculos
+  labels:
+    app: veiculos
