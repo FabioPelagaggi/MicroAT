@@ -18,8 +18,8 @@
 
 	<modules>
 		<module>eureka-server</module>
-		<module>status-checker</module>
 		<module>veiculos</module>
+		<module>catfact</module>
 	</modules>
 
 	<name>micro</name>
@@ -94,13 +94,6 @@
 				<version>1.0.0.RELEASE</version>
 				<scope>runtime</scope>
 			</dependency>
-
-<!-- 			<dependency>
-				<groupId>com.h2database</groupId>
-				<artifactId>h2</artifactId>
-				<version>2.3.232</version>
-				<scope>runtime</scope>
-			</dependency> -->
 
 		</dependencies>
 	</dependencyManagement>
