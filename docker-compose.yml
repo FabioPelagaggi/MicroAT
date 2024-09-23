@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  eureka-server:
+    image: eureka-server
+    container_name: eureka-server
+    ports:
+      - "8761:8761"
+    environment:
+      - SPRING_APPLICATION_NAME=eureka-server
+      - SERVER_PORT=8761
+      - EUREKA_CLIENT_REGISTERWITH_EUREKA=false
+      - EUREKA_CLIENT_FETCHREGISTRY=false
+
+  catfact:
+    image: catfact
+    container_name: catfact
+    ports:
+      - "8093:8093"
+    environment:
+      - SPRING_APPLICATION_NAME=CatFact
+      - SERVER_PORT=8093
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://localhost:8761/eureka
+      - EUREKA_CLIENT_FETCHREGISTRY=true
+      - EUREKA_CLIENT_REGISTERWITH_EUREKA=true
+      - CATFACT_URL=https://catfact.ninja/fact
+    depends_on:
+      - eureka-server
+
+  veiculos:
+    image: veiculos
+    container_name: veiculos
+    ports:
+      - "8090:8090"
+    environment:
+      - SPRING_APPLICATION_NAME=Veiculos
+      - SERVER_PORT=8090
+      - SPRING_R2DBC_URL=r2dbc:h2:mem:///veiculosdb
+      - SPRING_R2DBC_USERNAME=test
+      - SPRING_R2DBC_PASSWORD=test
+      - SPRING_MAIN_ALLOW_BEAN_DEFINITION_OVERRIDING=true
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://localhost:8761/eureka
+      - EUREKA_CLIENT_FETCHREGISTRY=true
+      - EUREKA_CLIENT_REGISTERWITH_EUREKA=true
+    depends_on:
+      - eureka-server
