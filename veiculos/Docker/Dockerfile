@@ -12,3 +12,8 @@ EXPOSE 8090
 
 # Comando para iniciar a aplicação Spring Boot
 ENTRYPOINT ["java", "-jar", "veiculos.jar"]
+
+# Comando para construir a imagem
+# docker build -t veiculos .
+# Comando para executar o contêiner
+# docker run -p 8090:8090 veiculos
